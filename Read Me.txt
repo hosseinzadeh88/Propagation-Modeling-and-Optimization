@@ -1,0 +1,23 @@
+
+Hi there
+This is just a small explanation and manual for this code
+This is an implementation for both the multi-wall and log-distance propagation models.
+You only need to adjust parameters inside the “propagation runner” file. There are a few things you can change.
+OK, you may need some additional modules that you’ve to install such as, scipy, numpy, scikit-image, openCV, and some additional files like salimage or salmodule (these are my own modules)
+You probably already have most of these, if you don’t just check how to install them, it may vary from python to python! 
+I do it with
+C:\Python36\pip install scipy
+C:\Python36\Scripts>pip install opencv-python
+Ok now that this is done lest have a look at the code.
+First thing you can change in the code is the type of propagation model, it can be either the multi wall model or the free space path loss. 
+Next is how you want to define the environment. You can either do it with an image, which the code then detects all the walls automatically, shows you the wall numbers and you need to assign appropriate attenuation to each wall.
+If you try to do it with a CSV file however, the attenuation should be provided within the CSV file. Please have a look at the example folder where you can find a very simple CSV file example.
+So lets say there is a wall with an end and start point x and y and it has an attenuation of 5dB then you define it as such in the CSV file. Next wall should be the same but in the next line!
+Xstart,Ystart,Xend,Yend,5 
+Then it’s the optimization option. If you have conducted practical field measurements, you can put the measurements in and set optimization to ON. The optimization then determines the optimal propagation parameters. If you only wants to simulate the propagation you have to set it to OFF.
+You can have multiple transmitters in the environment. If you set it to independent then the strongest received signal strength at any point will be considered. If you set it to continuous waveform, then the final signal strength is the combination of all the received waves from all transceiver. Depending on their phases shift, there will be nodes and antinodes, much like a standing wave.
+Finally if you have any practical measurements you have to put the measurements in. Once you fed the environment structure, it will be shown as an image. These are the corresponding pixels on the image where measurements were taken and this is the received signal strength that is measured.
+When you run the code with following these settings. 
+First we need to select the structure from an image. Then we need to calibrate the image, chose a wall that you know its length and now provide its length. Put in the number of transmitters in the environment. Click the on the image to assign the location of Tx1 and Tx2. Then all the walls that are in the environment will be shown, you may need to close this window to proceed. If automatic wall detection is not working accurately for you, you may need to make sure the lines are straight and all have the same width, preferably 1 pixel width. Ultimately you can define the structure in a CSV file that does not need automatic wall detection and therefore would be faster as well.
+Finally you will be presented with the analysis results, you can see the signal strength prediction at each location in the building by hovering your mouse on one of the signal strength maps. The attenuation of the walls derived from the optimization using the practical measurements would be shown as well.
+I have included some samples as well. Yet if you need any further help feel free to contact.
